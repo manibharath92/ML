@@ -5,8 +5,8 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from sklearn.metrics import silhouette_score
 
-df = pd.read_csv('customers.csv')# Assume it has the relevant columns
-print(df.describe())
+df = pd.read_csv('customers.csv').head(10)# Assume it has the relevant columns
+print("Descriping DataFrame \n",df.describe())
 
 features = df[['annual income', 'spending score', 'browsing time', 'frequency purchase']]
 scaler = StandardScaler()
@@ -45,7 +45,7 @@ plt.legend()
 plt.savefig("cluster.png")	
 
 score = silhouette_score(scaled_features,kmeans.labels_)
-print("Silhouette Score:", score)
+print("\n Silhouette Score:", score)
 
 mycluster = {}
 for i in range(len(df)):
@@ -54,6 +54,5 @@ for i in range(len(df)):
         mycluster[key] = []
     mycluster[key].append(df['customer_id'][i])
 
-print(mycluster)
-print("Shape of cluster centers:", kmeans.cluster_centers_)
-print("centeoid:", centroids)
+print("\n Clusters \n",mycluster)
+print("\n centeoid Points :", centroids)
